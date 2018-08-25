@@ -1,9 +1,16 @@
 from Adafruit_SHT31 import *
 
-sensor = SHT31(address = 0x44)
+sensorIn = SHT31(address = 0x44)
+sensorOut = SHT31(address = 0x45)
 
-degrees = sensor.read_temperature()
-humidity = sensor.read_humidity()
+degreesIn = sensor.read_temperature()
+humidityIn = sensor.read_humidity()
 
-print('Temp             = {0:0.3f} deg C'.format(degrees))
-print('Humidity         = {0:0.2f} %'.format(humidity))
+degreesOut = sensorOut.read_temperature()
+humidityOut = sensorOut.read_humidity()
+
+print('Temp IN             = {0:0.3f} deg C'.format(degreesOut))
+print('Humidity OUT        = {0:0.2f} %'.format(humidityOut))
+
+print('Temp IN             = {0:0.3f} deg C'.format(degreesIn))
+print('Humidity OUT        = {0:0.2f} %'.format(humidityIn))
