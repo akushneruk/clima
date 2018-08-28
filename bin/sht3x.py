@@ -11,7 +11,7 @@ sensorIn = SHT31(address = 0x44)
 sensorOut = SHT31(address = 0x45)
 delay=60
 
-def writeData(pause):
+def writeData():
     iso = time.ctime()
     json_body_in = [
     {
@@ -38,11 +38,11 @@ def writeData(pause):
     client = InfluxDBClient("localhost", 8086, "admin", os.environ.get('INFLUXDBPWD'), "clima")
     client.write_points(json_body_in)
     client.write_points(json_body_out)
-    time.sleep(pause)
 
 try:
     while True:
         writeData(delay)
         writeData(delay)
+        time.sleep(delay)
 except KeyboardInterrupt:
     pass
