@@ -1,26 +1,23 @@
-# clima system monitoring for meet
-### on Rasperberry Pi model 3
-
-
+# CLIMA SYSTEM MONITORING for meet
+#### on Rasperberry Pi model 3
 
 ### Setup ENV
 
 1. Fix locale and configure device (enable: ssh, i2c and serial)
 
 2. Install Grafana
-  1. Intall use [this]:http://docs.grafana.org/installation/debian/
+  1. Intall use [this](http://docs.grafana.org/installation/debian)
   2. Run Grafan using via systemd
     ```bash
         sudo systemctl daemon-reload
         sudo systemctl start grafana-server
         sudo systemctl status grafana-server
-
         sudo systemctl enable grafana-server.service
     ```
   3. Reboot and check
 
 3. Install influxDB
-    [InfluxDB]:https://canox.net/2018/01/installation-von-grafana-influxdb-telegraf-auf-einem-raspberry-pi/
+    [InfluxDB](https://canox.net/2018/01/installation-von-grafana-influxdb-telegraf-auf-einem-raspberry-pi/)
     ```bash
         curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
         echo "deb https://repos.influxdata.com/debian stretch stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
