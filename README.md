@@ -3,28 +3,49 @@
 
 
 
-## Setup ENV
+### Setup ENV
 
-1.  
-```bash
-    sudo apt-get update && apt-get upgrade -y
-```
-2. Create new sudo  user and enable ssh service.
-3. Enable i2c bus.
+1. Fix locale and configure device (enable: ssh, i2c and serial)
 
-4. Setup serial for rpi. 
-[Like this]                        :http://www.electronicwings.com/raspberry-pi/raspberry-pi-uart-communication-using-python-and-c
+2. Install Grafana
+  1. Intall use [this]:http://docs.grafana.org/installation/debian/
+  2. Run Grafan using via systemd
+    ```bash
+        sudo systemctl daemon-reload
+        sudo systemctl start grafana-server
+        sudo systemctl status grafana-server
 
-5.
-```bash
-    sudo apt-get install python3-pip
-    sudo python3 -m pip install --upgrade pip setuptools wheel
-```
+        sudo systemctl enable grafana-server.service
+    ```
+  3. Reboot and check
 
-6. 
-```bash
-    sudo pip3 install Adafruit_DHT
-    sudo pip3 install Adafruit_SHT31
-    sudo pip3 install Adafruit_GPIO
-```
-7. 
+3. Install influxDB
+    [InfluxDB]:https://canox.net/2018/01/installation-von-grafana-influxdb-telegraf-auf-einem-raspberry-pi/
+    ```bash
+        curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+        echo "deb https://repos.influxdata.com/debian stretch stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+        sudo apt update
+        sudo apt install influxdb 
+        sudo systemctl enable influxdb
+        sudo systemctl start influxdb 
+        influx
+        CREATE USER admin WITH PASSWORD 'YOUR_PASSWORD' WITH ALL PRIVILEGES
+        CREATE DATABASE clima
+    ```
+4.  Install pip and all needed dependency
+    ```bash
+        sudo apt-get install python3-pip
+        sudo python3 -m pip install --upgrade pip setuptools wheel
+    ```
+    ```bash
+        sudo pip3 install Adafruit_DHT
+        sudo pip3 install Adafruit_SHT31
+        sudo pip3 install Adafruit_GPIO
+        sudo pip3 install automationhat
+        sudo pip3 install influxdb
+    ```
+5. Install git and  clone repo
+    ```bash
+        sudo apt-get install git -y
+        git clone https://github.com/akushneruk/clima.git
+    ```

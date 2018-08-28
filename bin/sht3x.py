@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+
+import time
+import sys
+import datetime
+from influxdb import InfluxDBClient
 from Adafruit_SHT31 import *
 
 sensorIn = SHT31(address = 0x44)
@@ -9,8 +15,42 @@ humidityIn = sensorIn.read_humidity()
 degreesOut = sensorOut.read_temperature()
 humidityOut = sensorOut.read_humidity()
 
-print('Temp OUT             = {0:0.1f} deg C'.format(degreesOut))
-print('Humidity OUT        = {0:0.1f} %'.format(humidityOut))
+# Set this variables, influxDB should be localhost on Pi
+host = "localhost"
+port = 8086
+user = "root"
+password = "root"
+dbname = "clima"
 
-print('Temp IN             = {0:0.1f} deg C'.format(degreesIn))
-print('Humidity IN        = {0:0.1f} %'.format(humidityIn))
+# Sample period (s)
+interval = 60
+measurement = "Sensor"
+
+# Create the Influx DB object
+client = InfluxDBClient(host, port, user, password, dbname)
+
+# Run until keyboard out
+try:
+    while True:
+        iso = time.ctime()
+        print(iso)
+        json_body = [
+        {
+          "measurement": measurement,
+              "time": iso,
+              "fields": {
+                  "TempIn" : degreesIn,
+                  "HumIn" : humidityIn,
+                  "TempOut" : degreesOut,
+                  "HumInOut" : humidityOut
+              }
+          }
+        ]
+ 
+        # Write JSON to InfluxDB
+        client.write_points(json_body)
+        # Wait for next sample
+        time.sleep(interval)
+ s
+except KeyboardInterrupt:
+    pass
