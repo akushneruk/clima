@@ -51,6 +51,5 @@ try:
         client.write_points(json_body)
         # Wait for next sample
         time.sleep(interval)
- s
 except KeyboardInterrupt:
     pass
