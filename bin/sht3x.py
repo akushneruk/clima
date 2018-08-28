@@ -9,33 +9,40 @@ from Adafruit_SHT31 import *
 
 sensorIn = SHT31(address = 0x44)
 sensorOut = SHT31(address = 0x45)
+delay=60
 
-def writeData(temperature, humidity, device):
+def writeData(pause):
     iso = time.ctime()
-    json_body = [
+    json_body_in = [
     {
-        "measurement": device,
+        "measurement": "SensoreInBox",
             "time": iso,
             "fields": {
-                "Temperature" : temperature,
-                "Humidity" : humidity
+                "Temperature" : sensorIn.read_temperature(),
+                "Humidity" : sensorIn.read_humidity()
+            }
+        }
+    ]
+
+    json_body_out = [
+    {
+        "measurement": "SensoreOutBox",
+            "time": iso,
+            "fields": {
+                "Temperature" : sensorOut.read_temperature(),
+                "Humidity" : sensorOut.read_humidity()
             }
         }
     ]
 
     client = InfluxDBClient("localhost", 8086, "admin", os.environ.get('INFLUXDBPWD'), "clima")
-    client.write_points(json_body)
-    time.sleep(60)
+    client.write_points(json_body_in)
+    client.write_points(json_body_out)
+    time.sleep(pause)
 
 try:
     while True:
-        degreesIn = sensorIn.read_temperature()
-        humidityIn = sensorIn.read_humidity()
-        writeData(degreesIn, humidityIn, "SensoreInBox")
-
-        degreesOut = sensorOut.read_temperature()
-        humidityOut = sensorOut.read_humidity()
-        writeData(degreesOut, humidityOut, "SensoreOutBox")
-
+        writeData(delay)
+        writeData(delay)
 except KeyboardInterrupt:
     pass
