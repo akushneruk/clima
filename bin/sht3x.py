@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import time
 import sys
 import datetime
@@ -9,47 +10,32 @@ from Adafruit_SHT31 import *
 sensorIn = SHT31(address = 0x44)
 sensorOut = SHT31(address = 0x45)
 
-degreesIn = sensorIn.read_temperature()
-humidityIn = sensorIn.read_humidity()
+def writeData(temperature, humidity, device):
+    iso = time.ctime()
+    json_body = [
+    {
+        "measurement": device,
+            "time": iso,
+            "fields": {
+                "Temperature" : temperature,
+                "Humidity" : humidity
+            }
+        }
+    ]
 
-degreesOut = sensorOut.read_temperature()
-humidityOut = sensorOut.read_humidity()
+    client = InfluxDBClient("localhost", 8086, "admin", os.environ.get('INFLUXDBPWD'), "clima")
+    client.write_points(json_body)
+    time.sleep(60)
 
-# Set this variables, influxDB should be localhost on Pi
-host = "localhost"
-port = 8086
-user = "root"
-password = "root"
-dbname = "clima"
-
-# Sample period (s)
-interval = 60
-measurement = "Sensor"
-
-# Create the Influx DB object
-client = InfluxDBClient(host, port, user, password, dbname)
-
-# Run until keyboard out
 try:
     while True:
-        iso = time.ctime()
-        print(iso)
-        json_body = [
-        {
-          "measurement": measurement,
-              "time": iso,
-              "fields": {
-                  "TempIn" : degreesIn,
-                  "HumIn" : humidityIn,
-                  "TempOut" : degreesOut,
-                  "HumInOut" : humidityOut
-              }
-          }
-        ]
- 
-        # Write JSON to InfluxDB
-        client.write_points(json_body)
-        # Wait for next sample
-        time.sleep(interval)
+        degreesIn = sensorIn.read_temperature()
+        humidityIn = sensorIn.read_humidity()
+        writeData(degreesIn, humidityIn, "SensoreInBox")
+
+        degreesOut = sensorOut.read_temperature()
+        humidityOut = sensorOut.read_humidity()
+        writeData(degreesOut, humidityOut, "SensoreOutBox")
+
 except KeyboardInterrupt:
     pass
