@@ -12,6 +12,7 @@ sensorOut = SHT31(address = 0x45)
 delay=60
 
 def writeData():
+    """ write all data to db """
     iso = time.ctime()
     json_body_in = [
     {
@@ -41,7 +42,6 @@ def writeData():
 
 try:
     while True:
-        writeData()
         writeData()
         time.sleep(delay)
 except KeyboardInterrupt:
