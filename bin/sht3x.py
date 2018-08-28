@@ -41,8 +41,8 @@ def writeData():
 
 try:
     while True:
-        writeData(delay)
-        writeData(delay)
+        writeData()
+        writeData()
         time.sleep(delay)
 except KeyboardInterrupt:
     pass
