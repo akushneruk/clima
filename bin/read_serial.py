@@ -15,4 +15,4 @@ counter=0
  
 while 1:
  x=ser.readline()
- print(x)
+ print(str(x))
