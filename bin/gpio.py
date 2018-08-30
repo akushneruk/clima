@@ -7,7 +7,8 @@ GPIO.setwarnings(False)
 channel = [6, 13, 19, 26]
 
 for index in range(len(channel)):
-    	GPIO.setup(channel[index], GPIO.OUT)
+	GPIO.setup(channel[index], GPIO.OUT)
 	index+= 1
 
+GPIO.output(19, GPIO.LOW)
 
