@@ -40,6 +40,7 @@
         sudo pip3 install Adafruit_GPIO
         sudo pip3 install automationhat
         sudo pip3 install influxdb
+        sudo pip3 install flask
     ```
 5. Install git and  clone repo
     ```bash
