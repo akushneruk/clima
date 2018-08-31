@@ -13,10 +13,6 @@ for index in range(len(channel)):
 	GPIO.setup(channel[index], GPIO.OUT, initial=1)
 	index+= 1
 
-
-mode = "off"
-
-
 def gpio(value):
   print(value)
   GPIO.output(19, value)
@@ -46,10 +42,5 @@ def fan_thread():
             current_value = value
             gpio(value)
 
-#fan = threading.Thread(name='fan', target=fan_thread)
-#fan.start()
-
-#mode = "test"
-#fan.join()
 mode="test"
 fan_thread()
