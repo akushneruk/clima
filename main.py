@@ -10,7 +10,7 @@ GPIO.setwarnings(False)
 channel = [6, 13, 19, 26]
 
 for index in range(len(channel)):
-	GPIO.setup(channel[index], GPIO.OUT)
+	GPIO.setup(channel[index], GPIO.OUT, initial=1)
 	index+= 1
 
 
@@ -18,7 +18,9 @@ mode = "off"
 
 
 def gpio(value):
+  print(value)
   GPIO.output(19, value)
+  print("value set")
 
 def fan_thread():
     current_mode_activated = None
@@ -35,7 +37,7 @@ def fan_thread():
             'on':  [1, 1, 10, 10],
             '10/40': [1, 0, 600, 2400],
             '10/20': [1, 0, 600, 1200],
-            'test': [1, 0, 3, 10],
+            'test': [1, 0, 3, 7],
         }
         config = modes[mode]
         elapsed = (int(time.time()) - current_mode_activated) % (config[3] + config[2])
@@ -49,4 +51,5 @@ def fan_thread():
 
 #mode = "test"
 #fan.join()
+mode="test"
 fan_thread()
