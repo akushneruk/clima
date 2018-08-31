@@ -14,9 +14,7 @@ for index in range(len(channel)):
 	index+= 1
 
 def gpio(value):
-  print(value)
-  GPIO.output(19, value)
-  print("value set")
+  GPIO.output(channel[2], value)
 
 def fan_thread():
     current_mode_activated = None
