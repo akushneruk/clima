@@ -17,12 +17,3 @@ def nx_setcmd_0par(ser, command):  #Set operational Commands without parameters
     # see instruction set of NEXTION device to know the possible commands and what they do
     ser.write((command+EndCom).encode('latin-1'))
     return None
-
-
-def readSerial():
-    pattern = r"\w\w\d"
-    x = ser.readline().decode('utf-8')
-    if re.match(pattern, str(x)):
-            print("Found -- "+str(x))
-            foundMode = x
-    return foundMode
