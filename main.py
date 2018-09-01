@@ -26,7 +26,7 @@ x=ser.readline()
 
 try:
     while True:
-      fan_thread("10/20")
+    	fan_thread("10/20")
     	readSerial()
 except KeyboardInterrupt:
     print('interrupted!')
