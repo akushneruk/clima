@@ -26,8 +26,8 @@ intiGpio(channel)
 try:
     while True:
         fan_thread("10/20")
- 	x=ser.readline()
- 	print(str(x))
+ 	    x=ser.readline()
+ 	    print(str(x))
         time.sleep(1)
 except KeyboardInterrupt:
     print('interrupted!')
