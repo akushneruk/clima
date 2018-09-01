@@ -1,44 +1,33 @@
 #!/usr/bin/env python3
-
-import threading
 import time
+import serial
 import sys
 import RPi.GPIO as GPIO
+from mode import *
+from send import *
 
+
+#---INIT--
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 channel = [6, 13, 19, 26]
+ser = serial.Serial(
+    port='/dev/ttyAMA0',
+    baudrate = 9600,
+    parity=serial.PARITY_NONE,
+    stopbits=serial.STOPBITS_ONE,
+    bytesize=serial.EIGHTBITS,
+    timeout=1
+)
 
-for index in range(len(channel)):
-	GPIO.setup(channel[index], GPIO.OUT, initial=1)
-	index+= 1
+#--Setup
+intiGpio(channel)
 
-def gpio(value):
-  GPIO.output(channel[2], value)
-
-def fan_thread():
-    current_mode_activated = None
-    current_value = None
-    current_mode = None
-    global mode
+try:
     while True:
+        fan_thread("10/20")
+ 	x=ser.readline()
+ 	print(str(x))
         time.sleep(1)
-        if mode != current_mode:
-            current_mode = mode
-            current_mode_activated = int(time.time())
-        modes = {
-            'off': [0, 0, 10, 10], # param1 gpio value that wait for param3 time, param2 gpio value that wait for param4 time 
-            'on':  [1, 1, 10, 10],
-            '10/40': [1, 0, 600, 2400],
-            '10/20': [1, 0, 600, 1200],
-            'test': [1, 0, 3, 7],
-        }
-        config = modes[mode]
-        elapsed = (int(time.time()) - current_mode_activated) % (config[3] + config[2])
-        value = config[0] if elapsed < config[2] else config[1]
-        if current_value != value:
-            current_value = value
-            gpio(value)
-
-mode="test"
-fan_thread()
+except KeyboardInterrupt:
+    print('interrupted!')
