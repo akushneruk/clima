@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 import time
 import serial
 import sys
@@ -23,13 +23,10 @@ ser = serial.Serial(
 #--Setup
 intiGpio(channel)
 x=ser.readline()
-print(str(x))
 
 try:
     while True:
-        #fan_thread("10/20")
-        x=ser.readline()
-	print(x)
-        time.sleep(1)
+        fan_thread("10/20")
+	readSerial()
 except KeyboardInterrupt:
     print('interrupted!')
