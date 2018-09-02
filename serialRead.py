@@ -1,4 +1,4 @@
- #!/usr/bin/env python3
+#!/usr/bin/env python3
 import time
 import serial
 import re
@@ -12,15 +12,36 @@ ser = serial.Serial(
     timeout=1
 )
 
+fo = open("current_vent_mode", "w+")
+
 def readSerial(x):
     pattern = r"\w\w\d"
+    mode=""
     if re.match(pattern, str(x)):
-            print("Found -- "+x)
-    return x
+        if x == "vt0":
+            fo.seek(0)
+            fo.truncate()
+            fo.write(x)
+            print("write -- "+x)
+        elif x == "vt1":
+            fo.seek(0)
+            fo.truncate()
+            fo.write(x)
+            print("write -- "+x)
+        elif x == "vt2":
+            fo.seek(0)
+            fo.truncate()
+            fo.write(x)
+            print("write -- "+x)
+        elif x == "vt4":
+            fo.seek(0)
+            fo.truncate()
+            fo.write(x)
+            print("write -- "+x)
+        else:
+            print("suck")
 
 while True:
-    try:
-        serialLine = ser.readline().decode('utf-8')
-        readSerial(serialLine)
-    except:
-        pass
+    serialLine = ser.readline().decode('latin-1')
+    readSerial(serialLine)
+    time.sleep(1)

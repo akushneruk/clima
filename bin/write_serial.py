@@ -1,5 +1,3 @@
-
-
 #!/usr/bin/env python3
 import sys
 import time
@@ -28,7 +26,15 @@ def nx_setcmd_0par(ser, command):  #Set operational Commands without parameters
     ser.write((command+EndCom).encode('latin-1'))
     return None
 
-
+def nx_setValue(ser, pageID, componentID, value):  # writes the value in the number component atribute .val
+    value_str = 'p[' + str(pageID) + '].b[' + str(componentID)+']''.val=' + str(value)  # test here the "'"
+    ser.write((value_str+EndCom).encode('latin-1'))
+    return None
 
 #nx_setcmd_0par(ser, 'rest')
-nx_setText(ser, 1,2,'44')
+#nx_setText(ser, 2,4,"val=1")
+
+nx_setValue(ser, 2,1,0)
+nx_setValue(ser, 2,2,0)
+nx_setValue(ser, 2,3,0)
+nx_setValue(ser, 2,4,1)
