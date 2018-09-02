@@ -12,36 +12,78 @@ ser = serial.Serial(
     timeout=1
 )
 
-fo = open("current_vent_mode", "w+")
+vent_mode = open("current_vent_mode", "w+")
+hum_mode = open("current_hum_mode", "w+")
+lamp_mode = open("current_lamp_mode", "w+")
 
-def readSerial(x):
-    pattern = r"\w\w\d"
-    mode=""
-    if re.match(pattern, str(x)):
-        if x == "vt0":
-            fo.seek(0)
-            fo.truncate()
-            fo.write(x)
-            print("write -- "+x)
-        elif x == "vt1":
-            fo.seek(0)
-            fo.truncate()
-            fo.write(x)
-            print("write -- "+x)
-        elif x == "vt2":
-            fo.seek(0)
-            fo.truncate()
-            fo.write(x)
-            print("write -- "+x)
-        elif x == "vt4":
-            fo.seek(0)
-            fo.truncate()
-            fo.write(x)
-            print("write -- "+x)
-        else:
-            print("suck")
+vent_mode_pattern = r"v\w\d"
+hum_mode_pattern = r"h\w\d"
+lamp_mode_pattern = r"l\w\d"
+
+def readVentMode(x):
+    if x == "vt0":
+        vent_mode.seek(0)
+        vent_mode.truncate()
+        vent_mode.write(x)
+        print("write -- "+x)
+    elif x == "vt1":
+        vent_mode.seek(0)
+        vent_mode.truncate()
+        vent_mode.write(x)
+        print("write -- "+x)
+    elif x == "vt2":
+        vent_mode.seek(0)
+        vent_mode.truncate()
+        vent_mode.write(x)
+        print("write -- "+x)
+    elif x == "vt4":
+        vent_mode.seek(0)
+        vent_mode.truncate()
+        vent_mode.write(x)
+        print("write -- "+x)
+    else:
+        print("suck")
+
+def readHumMode(x):
+    if x == "hy0":
+        hum_mode.seek(0)
+        hum_mode.truncate()
+        hum_mode.write(x)
+        print("write -- "+x)
+    elif x == "hy1":
+        hum_mode.seek(0)
+        hum_mode.truncate()
+        hum_mode.write(x)
+        print("write -- "+x)
+    elif x == "hy2":
+        hum_mode.seek(0)
+        hum_mode.truncate()
+        hum_mode.write(x)
+        print("write -- "+x)
+
+def readLampMode(x):
+    if x == "lt0":
+        lamp_mode.seek(0)
+        lamp_mode.truncate()
+        lamp_mode.write(x)
+        print("write -- "+x)
+    elif x == "lt1":
+        lamp_mode.seek(0)
+        lamp_mode.truncate()
+        lamp_mode.write(x)
+        print("write -- "+x)
+    elif x == "lt2":
+        lamp_mode.seek(0)
+        lamp_mode.truncate()
+        lamp_mode.write(x)
+        print("write -- "+x)
 
 while True:
     serialLine = ser.readline().decode('latin-1')
-    readSerial(serialLine)
-    time.sleep(1)
+    if re.match(vent_mode_pattern, str(serialLine)):
+        readVentMode(serialLine)
+    elif re.match(hum_mode_pattern, str(serialLine)):
+        readHumMode(serialLine)
+    elif re.match(lamp_mode_pattern, str(serialLine)):
+        readLampMode(serialLine)
+
