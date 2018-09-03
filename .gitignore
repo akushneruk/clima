@@ -1,4 +1,2 @@
 __pycache__/
-current_vent_mode
-current_hum_mode
-current_lamp_mode
+bin/current_*
