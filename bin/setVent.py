@@ -24,7 +24,7 @@ def fan_thread():
     while True:
         time.sleep(1)
         # read file and get current vent mode( set from display)
-        with open("bin/current_vent_mode", 'r+') as file:
+        with open("current_vent_mode", 'r+') as file:
             for line in file:
                 mode = line  # get and set  mode
             file.seek(0)
