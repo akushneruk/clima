@@ -21,7 +21,7 @@ ser = serial.Serial(
 EndCom = "\xff\xff\xff"
 sensorIn = SHT31(address = 0x44)
 sensorOut = SHT31(address = 0x45)
-delay=60
+delay=10
 
 def nx_setText(ser, pageID, componentID, text):  # writes the text in the text component atribute .txt
     text = 'p[' + str(pageID) + '].b[' + str(componentID)+']''.txt="' + text + '"'
