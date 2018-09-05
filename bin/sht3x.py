@@ -65,5 +65,5 @@ try:
         # Send hum
         nx_setText(ser, 1,2,str(int(sensorIn.read_humidity())))
         time.sleep(delay)
-except KeyboardInterrupt:
+except IOError:
     pass

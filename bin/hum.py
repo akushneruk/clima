@@ -39,7 +39,7 @@ def hum(x, hum):
         nx_setValue(ser, 4, 1, 1)
         nx_setValue(ser, 4, 2, 0)
         nx_setValue(ser, 4, 3, 0)
-        print("hy0")
+        #print("hy0")
     elif x == "hy1":
         if hum < 80:
             gpio(1)
@@ -48,17 +48,20 @@ def hum(x, hum):
         nx_setValue(ser, 4, 1, 0)
         nx_setValue(ser, 4, 2, 1)
         nx_setValue(ser, 4, 3, 0)
-        print("hy1")
+        #print("hy1")
     elif x == "hy2":
         gpio(1)
         nx_setValue(ser, 4, 1, 0)
         nx_setValue(ser, 4, 2, 0)
         nx_setValue(ser, 4, 3, 1)
-        print("hy2")
+        #print("hy2")
 
 try:
     while True:
-        humidity = sensor.read_humidity()
+        try:
+            humidity = sensor.read_humidity()
+        except IOError:
+            print("Suck with sensors")
         with open("current_hum_mode", 'r+') as file:
             for line in file:
                 mode = line

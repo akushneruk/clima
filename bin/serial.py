@@ -2,6 +2,7 @@
 import time
 import serial
 import re
+from all import *
 
 ser = serial.Serial(
     port='/dev/ttyAMA0',
@@ -23,27 +24,25 @@ def readVentMode(x):
         vent_mode.truncate()
         vent_mode.write(x)
         vent_mode.close()
-        print("write -- "+x)
+        #print("write -- "+x)
     elif x == "vt1":
         vent_mode.seek(0)
         vent_mode.truncate()
         vent_mode.write(x)
         vent_mode.close()
-        print("write -- "+x)
+        #print("write -- "+x)
     elif x == "vt2":
         vent_mode.seek(0)
         vent_mode.truncate()
         vent_mode.write(x)
         vent_mode.close()
-        print("write -- "+x)
+        #print("write -- "+x)
     elif x == "vt4":
         vent_mode.seek(0)
         vent_mode.truncate()
         vent_mode.write(x)
         vent_mode.close()
-        print("write -- "+x)
-    else:
-        print("suck")
+        #print("write -- "+x)
 
 def readHumMode(x):
     hum_mode = open("current_hum_mode", "w+")
@@ -52,19 +51,19 @@ def readHumMode(x):
         hum_mode.truncate()
         hum_mode.write(x)
         hum_mode.close()
-        print("write -- "+x)
+        #print("write -- "+x)
     elif x == "hy1":
         hum_mode.seek(0)
         hum_mode.truncate()
         hum_mode.write(x)
         hum_mode.close()
-        print("write -- "+x)
+        #print("write -- "+x)
     elif x == "hy2":
         hum_mode.seek(0)
         hum_mode.truncate()
         hum_mode.write(x)
         hum_mode.close()
-        print("write -- "+x)
+        #print("write -- "+x)
 
 def readLampMode(x):
     lamp_mode = open("current_lamp_mode", "w+")
@@ -73,19 +72,22 @@ def readLampMode(x):
         lamp_mode.truncate()
         lamp_mode.write(x)
         lamp_mode.close()
-        print("write -- "+x)
+        #print("write -- "+x)
     elif x == "lt1":
         lamp_mode.seek(0)
         lamp_mode.truncate()
         lamp_mode.write(x)
         lamp_mode.close()
-        print("write -- "+x)
+        #print("write -- "+x)
     elif x == "lt2":
         lamp_mode.seek(0)
         lamp_mode.truncate()
         lamp_mode.write(x)
         lamp_mode.close()
-        print("write -- "+x)
+        #print("write -- "+x)
+
+# First setup
+
 
 try:
     while True:
