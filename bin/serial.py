@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-import time
-import serial
-import re
+import os, time, sys, datetime, time, serial,struct, re
+from influxdb import InfluxDBClient
+from Adafruit_SHT31 import *
 from all import *
 
 ser = serial.Serial(
@@ -13,90 +13,40 @@ ser = serial.Serial(
     timeout=1
 )
 
-vent_mode_pattern = r"v\w\d"
-hum_mode_pattern = r"h\w\d"
-lamp_mode_pattern = r"l\w\d"
-
-def readVentMode(x):
-    vent_mode = open("current_vent_mode", "w+")
-    if x == "vt0":
-        vent_mode.seek(0)
-        vent_mode.truncate()
-        vent_mode.write(x)
-        vent_mode.close()
-        #print("write -- "+x)
-    elif x == "vt1":
-        vent_mode.seek(0)
-        vent_mode.truncate()
-        vent_mode.write(x)
-        vent_mode.close()
-        #print("write -- "+x)
-    elif x == "vt2":
-        vent_mode.seek(0)
-        vent_mode.truncate()
-        vent_mode.write(x)
-        vent_mode.close()
-        #print("write -- "+x)
-    elif x == "vt4":
-        vent_mode.seek(0)
-        vent_mode.truncate()
-        vent_mode.write(x)
-        vent_mode.close()
-        #print("write -- "+x)
-
-def readHumMode(x):
-    hum_mode = open("current_hum_mode", "w+")
-    if x == "hy0":
-        hum_mode.seek(0)
-        hum_mode.truncate()
-        hum_mode.write(x)
-        hum_mode.close()
-        #print("write -- "+x)
-    elif x == "hy1":
-        hum_mode.seek(0)
-        hum_mode.truncate()
-        hum_mode.write(x)
-        hum_mode.close()
-        #print("write -- "+x)
-    elif x == "hy2":
-        hum_mode.seek(0)
-        hum_mode.truncate()
-        hum_mode.write(x)
-        hum_mode.close()
-        #print("write -- "+x)
-
-def readLampMode(x):
-    lamp_mode = open("current_lamp_mode", "w+")
-    if x == "lt0":
-        lamp_mode.seek(0)
-        lamp_mode.truncate()
-        lamp_mode.write(x)
-        lamp_mode.close()
-        #print("write -- "+x)
-    elif x == "lt1":
-        lamp_mode.seek(0)
-        lamp_mode.truncate()
-        lamp_mode.write(x)
-        lamp_mode.close()
-        #print("write -- "+x)
-    elif x == "lt2":
-        lamp_mode.seek(0)
-        lamp_mode.truncate()
-        lamp_mode.write(x)
-        lamp_mode.close()
-        #print("write -- "+x)
-
-# First setup
-
+hum_relay = 13
+sensorIn = SHT31(address = 0x44)
+sensorOut = SHT31(address = 0x45)
+delay=1
 
 try:
     while True:
+        # send to influxdb set temperature and humidity for display
+        try:
+            nx_setText(ser, 1,1,str(int(sensorIn.read_temperature())))
+            nx_setText(ser, 1,2,str(int(sensorIn.read_temperature())))
+            writeData(int(sensorIn.read_temperature()), int(sensorIn.read_temperature()), sensorOut.read_temperature()), int(sensorOu.read_temperature()) )
+        except IOError:
+            pass
+        
+        # Wait for incoming serial and write to file new mode
         serialLine = ser.readline().decode('latin-1')
-        if re.match(vent_mode_pattern, str(serialLine)):
+        if re.match(r"v\w\d", str(serialLine)):
             readVentMode(serialLine)
-        elif re.match(hum_mode_pattern, str(serialLine)):
+        elif re.match(r"h\w\d", str(serialLine)):
             readHumMode(serialLine)
-        elif re.match(lamp_mode_pattern, str(serialLine)):
+        elif re.match(r"l\w\d", str(serialLine)):
             readLampMode(serialLine)
+
+        #
+        with open("current_hum_mode", 'r+') as file:
+            for line in file:
+                mode = line
+            file.seek(0)
+        try:
+            humMode(hum_relay, mode, int(sensorIn.read_temperature()))
+        except IOError:
+            pass
+
+        time.sleep(delay)
 except KeyboardInterrupt:
     pass
