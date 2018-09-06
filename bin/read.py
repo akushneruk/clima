@@ -22,18 +22,18 @@ ser = serial.Serial(
 ser.reset_output_buffer()
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-# channel = [6, 13, 19, 26]
 
-# def intiGpio(channel):
-#     for index in range(len(channel)):
-#         GPIO.setup(channel[index], GPIO.OUT, initial=1)
-#         index+= 1
-
+# delay for loop sleep
+delay=1
+# Gpio number for hum relay
 hum_relay = 13
+# Setup hum relay for output
+GPIO.setup(hum_relay, GPIO.OUT, initial=1)
+# Read temp and hum from sensors
 sensorIn = SHT31(address = 0x44)
 sensorOut = SHT31(address = 0x45)
-delay=1
-GPIO.setup(13, GPIO.OUT, initial=1)
+
+firstHumStart()
 
 try:
     while True:
@@ -54,7 +54,7 @@ try:
         elif re.match(r"l\w\d", str(serialLine)):
             readLampMode(serialLine)
 
-        #
+        # Read file with current hum mode and set gpio
         with open("current_hum_mode", 'r+') as file:
             for line in file:
                 mode = line
