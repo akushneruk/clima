@@ -22,17 +22,18 @@ ser = serial.Serial(
 ser.reset_output_buffer()
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-channel = [6, 13, 19, 26]
+# channel = [6, 13, 19, 26]
 
-def intiGpio(channel):
-    for index in range(len(channel)):
-        GPIO.setup(channel[index], GPIO.OUT, initial=1)
-        index+= 1
+# def intiGpio(channel):
+#     for index in range(len(channel)):
+#         GPIO.setup(channel[index], GPIO.OUT, initial=1)
+#         index+= 1
 
 hum_relay = 13
 sensorIn = SHT31(address = 0x44)
 sensorOut = SHT31(address = 0x45)
 delay=1
+GPIO.setup(13, GPIO.OUT, initial=1)
 
 try:
     while True:
