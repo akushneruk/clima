@@ -21,10 +21,10 @@ def firstHumStart():
     hum_mode = open("current_hum_mode", "w+")
     hum_mode.seek(0)
     hum_mode.truncate()
-    hum_mode.write("hy1")
+    hum_mode.write("hy0")
     hum_mode.close()
-    nx_setValue(ser, 4,1,0)
-    nx_setValue(ser, 4,2,1)
+    nx_setValue(ser, 4,1,1)
+    nx_setValue(ser, 4,2,0)
     nx_setValue(ser, 4,3,0)
 
 def readVentMode(x):
