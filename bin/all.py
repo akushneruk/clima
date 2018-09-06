@@ -1,3 +1,11 @@
+import os
+import time
+import time
+import datetime
+import struct
+import re
+import serial
+
 def readVentMode(x):
     vent_mode = open("current_vent_mode", "w+")
     if x == "vt0":

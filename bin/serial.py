@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-import os, time, sys, datetime, time, serial,struct, re
+import os
+import time
+import time
+import datetime
+import struct
+import re
+import serial
 from influxdb import InfluxDBClient
 from Adafruit_SHT31 import *
 from all import *
@@ -12,6 +18,7 @@ ser = serial.Serial(
     bytesize=serial.EIGHTBITS,
     timeout=1
 )
+ser.reset_output_buffer()
 
 hum_relay = 13
 sensorIn = SHT31(address = 0x44)
@@ -24,7 +31,7 @@ try:
         try:
             nx_setText(ser, 1,1,str(int(sensorIn.read_temperature())))
             nx_setText(ser, 1,2,str(int(sensorIn.read_temperature())))
-            writeData(int(sensorIn.read_temperature()), int(sensorIn.read_temperature()), sensorOut.read_temperature()), int(sensorOu.read_temperature()) )
+            writeData(int(sensorIn.read_temperature()), int(sensorIn.read_temperature()), int(sensorOut.read_temperature()), int(sensorOut.read_temperature()) )
         except IOError:
             pass
         
