@@ -1,6 +1,5 @@
 import os
 import time
-import time
 import datetime
 import struct
 import re
