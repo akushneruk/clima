@@ -6,6 +6,7 @@ import datetime
 import struct
 import re
 import serial
+import RPi.GPIO as GPIO
 from influxdb import InfluxDBClient
 from Adafruit_SHT31 import *
 from all import *

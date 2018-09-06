@@ -4,8 +4,12 @@ import datetime
 import struct
 import re
 import serial
+import RPi.GPIO as GPIO
 from influxdb import InfluxDBClient
 from Adafruit_SHT31 import *
+
+def gpio(hum_relay, value):
+    GPIO.output(hum_relay, value)
 
 def readVentMode(x):
     vent_mode = open("current_vent_mode", "w+")
@@ -102,8 +106,6 @@ def humMode(hum_relay, x, hum):
         nx_setValue(ser, 4, 3, 1)
         #print("hy2")
 
-def gpio(hum_relay, value):
-    GPIO.output(hum_relay, value)
 
 def writeData(tempIn, humIn, tempOut, humOut ):
     """ write all data to db """
