@@ -27,6 +27,26 @@ def firstHumStart():
     nx_setValue(ser, 4,2,0)
     nx_setValue(ser, 4,3,0)
 
+def firstVentStart(t):
+    hum_mode = open("current_vent_mode", "w+")
+    hum_mode.seek(0)
+    hum_mode.truncate()
+    if t => 16:
+        hum_mode.write("vt4")
+        hum_mode.close()
+        nx_setValue(ser, 4,2,0)
+        nx_setValue(ser, 4,2,0)
+        nx_setValue(ser, 4,2,0)
+        nx_setValue(ser, 4,2,1)
+    elif t < 16:
+        hum_mode.write("vt4")
+        hum_mode.close()
+        nx_setValue(ser, 4,2,0)
+        nx_setValue(ser, 4,2,0)
+        nx_setValue(ser, 4,2,1)
+        nx_setValue(ser, 4,2,0)
+
+
 def readVentMode(x):
     vent_mode = open("current_vent_mode", "w+")
     if x == "vt0":
@@ -34,25 +54,21 @@ def readVentMode(x):
         vent_mode.truncate()
         vent_mode.write(x)
         vent_mode.close()
-        #print("write -- "+x)
     elif x == "vt1":
         vent_mode.seek(0)
         vent_mode.truncate()
         vent_mode.write(x)
         vent_mode.close()
-        #print("write -- "+x)
     elif x == "vt2":
         vent_mode.seek(0)
         vent_mode.truncate()
         vent_mode.write(x)
         vent_mode.close()
-        #print("write -- "+x)
     elif x == "vt4":
         vent_mode.seek(0)
         vent_mode.truncate()
         vent_mode.write(x)
         vent_mode.close()
-        #print("write -- "+x)
 
 def readHumMode(x):
     hum_mode = open("current_hum_mode", "w+")
@@ -61,19 +77,16 @@ def readHumMode(x):
         hum_mode.truncate()
         hum_mode.write(x)
         hum_mode.close()
-        #print("write -- "+x)
     elif x == "hy1":
         hum_mode.seek(0)
         hum_mode.truncate()
         hum_mode.write(x)
         hum_mode.close()
-        #print("write -- "+x)
     elif x == "hy2":
         hum_mode.seek(0)
         hum_mode.truncate()
         hum_mode.write(x)
         hum_mode.close()
-        #print("write -- "+x)
 
 def readLampMode(x):
     lamp_mode = open("current_lamp_mode", "w+")

@@ -3,16 +3,16 @@ import time
 import serial
 import sys
 import RPi.GPIO as GPIO
+from Adafruit_SHT31 import *
+from all import *
 
 #---INIT--
+vent_relay = 6
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-channel = [6, 13, 19, 26]
+GPIO.setup(vent_relay, GPIO.OUT, initial=1)
 
-def intiGpio(channel):
-    for index in range(len(channel)):
-        GPIO.setup(channel[index], GPIO.OUT, initial=1)
-        index+= 1
+sensorIn = SHT31(address = 0x44)
 
 def gpio(value):
     GPIO.output(6, value)
@@ -45,6 +45,11 @@ def fan_thread():
         if current_value != value:
             current_value = value
             gpio(value)
+
+try:
+    firstVentStart(sensorIn.read_temperature())
+except IOError:
+    pass
 
 try:
     intiGpio(channel)

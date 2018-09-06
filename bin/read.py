@@ -41,7 +41,6 @@ try:
         try:
             nx_setText(ser, 1,1,str(int(sensorIn.read_temperature())))
             nx_setText(ser, 1,2,str(int(sensorIn.read_humidity())))
-            writeData( sensorIn.read_temperature(), sensorIn.read_humidity(), sensorOut.read_temperature(), sensorOut.read_humidity() )
         except IOError:
             pass
         
