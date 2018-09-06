@@ -8,9 +8,6 @@ import RPi.GPIO as GPIO
 from influxdb import InfluxDBClient
 from Adafruit_SHT31 import *
 
-def gpio(hum_relay, value):
-    GPIO.output(hum_relay, value)
-
 def readVentMode(x):
     vent_mode = open("current_vent_mode", "w+")
     if x == "vt0":

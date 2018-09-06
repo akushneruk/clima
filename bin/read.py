@@ -26,6 +26,9 @@ sensorIn = SHT31(address = 0x44)
 sensorOut = SHT31(address = 0x45)
 delay=1
 
+def gpio(hum_relay, value):
+    GPIO.output(hum_relay, value)
+
 try:
     while True:
         # send to influxdb set temperature and humidity for display
