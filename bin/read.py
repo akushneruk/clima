@@ -60,6 +60,7 @@ try:
                 mode = line
             file.seek(0)
         try:
+            print(mode)
             humMode(hum_relay, mode, int(sensorIn.read_temperature()))
         except IOError:
             pass
