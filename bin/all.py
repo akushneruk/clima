@@ -8,6 +8,15 @@ import RPi.GPIO as GPIO
 from influxdb import InfluxDBClient
 from Adafruit_SHT31 import *
 
+ser = serial.Serial(
+    port='/dev/ttyAMA0',
+    baudrate = 9600,
+    parity=serial.PARITY_NONE,
+    stopbits=serial.STOPBITS_ONE,
+    bytesize=serial.EIGHTBITS,
+    timeout=1
+)
+
 def readVentMode(x):
     vent_mode = open("current_vent_mode", "w+")
     if x == "vt0":
