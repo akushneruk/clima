@@ -4,6 +4,8 @@ import datetime
 import struct
 import re
 import serial
+from influxdb import InfluxDBClient
+from Adafruit_SHT31 import *
 
 def readVentMode(x):
     vent_mode = open("current_vent_mode", "w+")
