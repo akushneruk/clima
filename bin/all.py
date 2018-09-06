@@ -80,24 +80,24 @@ def readLampMode(x):
 def humMode(hum_relay, x, hum):
     if x == "hy0":
         if hum <= 65:
-            gpio(hum_relay, 1)
+            GPIO.output(hum_relay, 1)
         elif hum > 65:
-            gpio(hum_relay, 0)
+            GPIO.output(hum_relay, 0)
         nx_setValue(ser, 4, 1, 1)
         nx_setValue(ser, 4, 2, 0)
         nx_setValue(ser, 4, 3, 0)
         #print("hy0")
     elif x == "hy1":
         if hum < 80:
-            gpio(hum_relay, 1)
+            GPIO.output(hum_relay, 1)
         elif hum > 80:
-            gpio(hum_relay, 0)
+            GPIO.output(hum_relay, 0)
         nx_setValue(ser, 4, 1, 0)
         nx_setValue(ser, 4, 2, 1)
         nx_setValue(ser, 4, 3, 0)
         #print("hy1")
     elif x == "hy2":
-        gpio(hum_relay, 1)
+        GPIO.output(hum_relay, 1)
         nx_setValue(ser, 4, 1, 0)
         nx_setValue(ser, 4, 2, 0)
         nx_setValue(ser, 4, 3, 1)
