@@ -52,7 +52,6 @@ except IOError:
     pass
 
 try:
-    intiGpio(channel)
     fan_thread()
 except KeyboardInterrupt:
     print('interrupted!')
