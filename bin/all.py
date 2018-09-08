@@ -34,17 +34,17 @@ def firstVentStart(t):
     if t >= 16:
         hum_mode.write("vt4")
         hum_mode.close()
-        nx_setValue(ser, 4,2,0)
-        nx_setValue(ser, 4,2,0)
-        nx_setValue(ser, 4,2,0)
-        nx_setValue(ser, 4,2,1)
+        nx_setValue(ser, 2,1,0)
+        nx_setValue(ser, 2,2,0)
+        nx_setValue(ser, 2,3,0)
+        nx_setValue(ser, 2,4,1)
     elif t < 16:
         hum_mode.write("vt4")
         hum_mode.close()
-        nx_setValue(ser, 4,2,0)
-        nx_setValue(ser, 4,2,0)
-        nx_setValue(ser, 4,2,1)
-        nx_setValue(ser, 4,2,0)
+        nx_setValue(ser, 2,1,0)
+        nx_setValue(ser, 2,2,1)
+        nx_setValue(ser, 2,3,0)
+        nx_setValue(ser, 2,4,0)
 
 def firstLampStart():
     lamp_mode = open("current_lamp_mode", "w+")
@@ -122,8 +122,10 @@ def humMode(hum_relay, x, hum):
     if x == "hy0":
         if hum <= 65:
             GPIO.output(hum_relay, 1)
+            nx_setValue(ser, 6,9,1)
         elif hum > 65:
             GPIO.output(hum_relay, 0)
+            nx_setValue(ser, 6,9,0)
         nx_setValue(ser, 4, 1, 1)
         nx_setValue(ser, 4, 2, 0)
         nx_setValue(ser, 4, 3, 0)
@@ -131,8 +133,10 @@ def humMode(hum_relay, x, hum):
     elif x == "hy1":
         if hum < 80:
             GPIO.output(hum_relay, 1)
+            nx_setValue(ser, 6,9,1)
         elif hum > 80:
             GPIO.output(hum_relay, 0)
+            nx_setValue(ser, 6,9,0)
         nx_setValue(ser, 4, 1, 0)
         nx_setValue(ser, 4, 2, 1)
         nx_setValue(ser, 4, 3, 0)

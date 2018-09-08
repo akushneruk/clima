@@ -44,7 +44,12 @@ def fan_thread():
         value = config[0] if elapsed < config[2] else config[1]
         if current_value != value:
             current_value = value
-            gpio(value)
+            if value == 0:
+                gpio(value)
+                nx_setValue(ser, 6,10,1)
+            elif value == 1:
+                gpio(value)
+                nx_setValue(ser, 6,10,0)
 
 try:
     firstVentStart(sensorIn.read_temperature())
