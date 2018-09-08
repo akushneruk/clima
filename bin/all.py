@@ -146,9 +146,9 @@ def humMode(hum_relay, x, hum):
 
 def lampMode(lamp_relay, x):
     if x == "lt1":
-        GPIO.output(lamp_relay, 1)
-    elif x == "lt2":
         GPIO.output(lamp_relay, 0)
+    elif x == "lt2":
+        GPIO.output(lamp_relay, 1)
 
 def writeData(tempIn, humIn, tempOut, humOut ):
     """ write all data to db """
