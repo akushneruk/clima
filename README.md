@@ -35,15 +35,22 @@
         sudo python3 -m pip install --upgrade pip setuptools wheel
     ```
     ```bash
-        sudo pip3 install Adafruit_DHT
         sudo pip3 install Adafruit_SHT31
         sudo pip3 install Adafruit_GPIO
         sudo pip3 install automationhat
         sudo pip3 install influxdb
         sudo pip3 install flask
+        sudo pip3 install schedule
     ```
 5. Install git and  clone repo
     ```bash
         sudo apt-get install git -y
         git clone https://github.com/akushneruk/clima.git
     ```
+
+
+# INFO
+Relays:
+GPIO 26 -- Lamp
+GPIO 6 -- Ventilation
+GPIO 13 -- Humidity

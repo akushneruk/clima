@@ -46,6 +46,15 @@ def firstVentStart(t):
         nx_setValue(ser, 4,2,1)
         nx_setValue(ser, 4,2,0)
 
+def firstLampStart():
+    lamp_mode = open("current_lamp_mode", "w+")
+    lamp_mode.seek(0)
+    lamp_mode.truncate()
+    lamp_mode.write("lt0")
+    lamp_mode.close()
+    nx_setValue(ser, 5,1,1)
+    nx_setValue(ser, 5,2,0)
+    nx_setValue(ser, 5,3,0)
 
 def readVentMode(x):
     vent_mode = open("current_vent_mode", "w+")
@@ -135,6 +144,11 @@ def humMode(hum_relay, x, hum):
         nx_setValue(ser, 4, 3, 1)
         #print("hy2")
 
+def lampMode(lamp_relay, x):
+    if x == "lt1":
+        GPIO.output(lamp_relay, 1)
+    elif x == "lt2":
+        GPIO.output(lamp_relay, 0)
 
 def writeData(tempIn, humIn, tempOut, humOut ):
     """ write all data to db """

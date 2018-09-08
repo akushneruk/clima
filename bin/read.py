@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import os
 import time
-import time
 import datetime
 import struct
 import re
@@ -25,15 +24,18 @@ GPIO.setwarnings(False)
 
 # delay for loop sleep
 delay=1
-# Gpio number for hum relay
+# Gpio number for hum and lamp relay
 hum_relay = 13
-# Setup hum relay for output
+lamp_relay = 26
+# Setup hum and lamp relay for output
 GPIO.setup(hum_relay, GPIO.OUT, initial=1)
+GPIO.setup(lamp_relay, GPIO.OUT, initial=1)
 # Read temp and hum from sensors
 sensorIn = SHT31(address = 0x44)
 sensorOut = SHT31(address = 0x45)
 
 firstHumStart()
+firstLampStart()
 
 try:
     while True:
@@ -59,10 +61,17 @@ try:
                 mode = line
             file.seek(0)
         try:
-            print(mode)
+            #print(mode)
             humMode(hum_relay, mode, int(sensorIn.read_humidity()))
         except IOError:
             pass
+
+        # Read file with current lamp mode and set gpio
+        with open("current_lamp_mode", 'r+') as file:
+            for line in file:
+                lamp = line
+            file.seek(0)
+        lampMode(lamp_relay, lamp)
 
         time.sleep(delay)
 except KeyboardInterrupt:
