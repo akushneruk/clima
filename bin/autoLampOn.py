@@ -22,7 +22,7 @@ def autoLampMode(lamp_relay):
     if lamp == "lt0":
         GPIO.output(lamp_relay, 0)
         print("lamp is on")
-        time.sleep(60)
+        time.sleep(600)
         GPIO.output(lamp_relay, 1)
         print("lamp is off")
     return
