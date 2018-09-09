@@ -157,11 +157,11 @@ def lampMode(lamp_relay, x):
 
 def writeData(tempIn, humIn, tempOut, humOut ):
     """ write all data to db """
-    iso = time.ctime()
+    #iso = time.ctime()
     json_body_in = [
     {
         "measurement": "SensoreInBox",
-            "time": iso,
+    #        "time": iso,
             "fields": {
                 "Temperature" : tempIn,
                 "Humidity" : humIn
@@ -172,7 +172,7 @@ def writeData(tempIn, humIn, tempOut, humOut ):
     json_body_out = [
     {
         "measurement": "SensoreOutBox",
-            "time": iso,
+     #       "time": iso,
             "fields": {
                 "Temperature" : tempOut,
                 "Humidity" : humOut
