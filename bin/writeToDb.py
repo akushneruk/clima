@@ -15,6 +15,7 @@ while True:
     # send to influxdb set temperature and humidity for display
     try:
         writeData( sensorIn.read_temperature(), sensorIn.read_humidity(), sensorOut.read_temperature(), sensorOut.read_humidity() )
+        print( sensorIn.read_temperature(), sensorIn.read_humidity(), sensorOut.read_temperature(), sensorOut.read_humidity() )
         time.sleep(delay)
     except IOError:
         pass
