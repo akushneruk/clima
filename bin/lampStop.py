@@ -10,7 +10,7 @@ from all import *
 
 # Init
 lamp_relay = 26
-delay = 10
+delay = 300
 
 ser.reset_output_buffer()
 GPIO.setmode(GPIO.BCM)

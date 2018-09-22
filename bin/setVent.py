@@ -28,7 +28,6 @@ def fan_thread():
             for line in file:
                 mode = line  # get and set  mode
             file.seek(0)
-        print(mode)
         if mode != current_mode:
             current_mode = mode
             current_mode_activated = int(time.time())

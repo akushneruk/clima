@@ -18,7 +18,6 @@ def autoLampMode(lamp_relay):
         for line in file:
             lamp = line
         file.seek(0)
-    print(lamp)    
     if lamp == "lt0":
         GPIO.output(lamp_relay, 0)
         print("lamp is on")

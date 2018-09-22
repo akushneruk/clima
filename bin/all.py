@@ -126,7 +126,6 @@ def humMode(hum_relay, x, hum):
         nx_setValue(ser, 4, 1, 1)
         nx_setValue(ser, 4, 2, 0)
         nx_setValue(ser, 4, 3, 0)
-        #print("hy0")
     elif x == "hy1":
         if hum < 80:
             GPIO.output(hum_relay, 1)
@@ -137,14 +136,12 @@ def humMode(hum_relay, x, hum):
         nx_setValue(ser, 4, 1, 0)
         nx_setValue(ser, 4, 2, 1)
         nx_setValue(ser, 4, 3, 0)
-        #print("hy1")
     elif x == "hy2":
         GPIO.output(hum_relay, 1)
         nx_setValue(ser, 6,10,0)
         nx_setValue(ser, 4, 1, 0)
         nx_setValue(ser, 4, 2, 0)
         nx_setValue(ser, 4, 3, 1)
-        #print("hy2")
 
 def lampMode(lamp_relay, x):
     if x == "lt1":
