@@ -72,6 +72,9 @@ try:
             file.seek(0)
         lampMode(lamp_relay, lamp)
         
+        #
+        sendStatus()
+
         time.sleep(delay)
 except KeyboardInterrupt:
     pass

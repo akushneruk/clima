@@ -154,6 +154,72 @@ def lampMode(lamp_relay, x):
     elif x == "lt2":
         GPIO.output(lamp_relay, 1)
 
+def sendStatus():
+    with open("current_hum_mode", 'r+') as file:
+        for line in file:
+            mode = line
+        file.seek(0)
+    if mode == "hy0":
+        nx_setValue(ser, 4, 1, 1)
+        nx_setValue(ser, 4, 2, 0)
+        nx_setValue(ser, 4, 3, 0)
+    elif mode == "hy1":
+        nx_setValue(ser, 4, 1, 0)
+        nx_setValue(ser, 4, 2, 1)
+        nx_setValue(ser, 4, 3, 0)
+    elif mode == "hy2":
+        nx_setValue(ser, 4, 1, 0)
+        nx_setValue(ser, 4, 2, 0)
+        nx_setValue(ser, 4, 3, 1)
+
+    with open("current_vent_mode", 'r+') as file:
+        for line in file:
+            mode = line
+        file.seek(0)
+    if mode == "vt0":
+        nx_setValue(ser, 2,1,1)
+        nx_setValue(ser, 2,2,0)
+        nx_setValue(ser, 2,3,0)
+        nx_setValue(ser, 2,4,0)
+    elif mode == "vt1":
+        nx_setValue(ser, 2,1,0)
+        nx_setValue(ser, 2,2,1)
+        nx_setValue(ser, 2,3,0)
+        nx_setValue(ser, 2,4,0)
+    elif mode == "vt2":
+        nx_setValue(ser, 2,1,0)
+        nx_setValue(ser, 2,2,0)
+        nx_setValue(ser, 2,3,1)
+        nx_setValue(ser, 2,4,0)
+    elif mode == "vt4":
+        nx_setValue(ser, 2,1,0)
+        nx_setValue(ser, 2,2,0)
+        nx_setValue(ser, 2,3,0)
+        nx_setValue(ser, 2,4,1)
+
+    with open("current_lamp_mode", 'r+') as file:
+        for line in file:
+            mode = line
+        file.seek(0)
+    if mode == "lt0":
+        nx_setValue(ser, 5,1,1)
+        nx_setValue(ser, 5,2,0)
+        nx_setValue(ser, 5,3,0)
+    elif mode == "lt1":
+        nx_setValue(ser, 5,1,0)
+        nx_setValue(ser, 5,2,1)
+        nx_setValue(ser, 5,3,0)   
+    elif mode == "lt2":
+        nx_setValue(ser, 5,1,0)
+        nx_setValue(ser, 5,2,0)
+        nx_setValue(ser, 5,3,1)     
+
+    status = open("status", "w+")
+    status.seek(0)
+    status.truncate()
+    status.write("0")
+    status.close()  
+
 def writeData(tempIn, humIn, tempOut, humOut ):
     """ write all data to db """
     json_body_in = [

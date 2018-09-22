@@ -12,7 +12,6 @@ from all import *
 lamp_relay = 26
 delay = 300
 
-ser.reset_output_buffer()
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(lamp_relay, GPIO.OUT, initial=1)
