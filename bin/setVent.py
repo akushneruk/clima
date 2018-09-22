@@ -46,10 +46,10 @@ def fan_thread():
             current_value = value
             if value == 0:
                 gpio(value)
-                nx_setValue(ser, 6,9,0)
+                nx_setValue(ser, 6,11,0)
             elif value == 1:
                 gpio(value)
-                nx_setValue(ser, 6,9,1)
+                nx_setValue(ser, 6,11,1)
 
 try:
     firstVentStart(sensorIn.read_temperature())
