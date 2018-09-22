@@ -44,9 +44,9 @@ def fan_thread():
         if current_value != value:
             current_value = value
             gpio(value)
-            if config[0] == 0:
+            if value == 0:
                 nx_setValue(ser, 6,9,1)
-            elif config[0] == 1:
+            elif value == 1:
                 nx_setValue(ser, 6,9,0)
 
 try:
