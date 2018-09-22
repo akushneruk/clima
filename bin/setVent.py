@@ -35,8 +35,8 @@ def fan_thread():
         modes = {
             'vt4': [1, 1, 10, 10],  # off
             'vt2':  [0, 0, 10, 10], # on
-            'vt0': [0, 1, 4, 16],   # 10/40
-            'vt1': [0, 1, 4, 8],    # 10/20
+            'vt0': [0, 1, 600, 2400 ],   # 10/40
+            'vt1': [0, 1, 600, 1200],    # 10/20
             'test': [0, 1, 2, 4],   # for test
         }
         config = modes[mode]
@@ -47,7 +47,7 @@ def fan_thread():
             gpio(value)
             if config[0] == 0:
                 nx_setValue(ser, 6,9,1)
-            elif value == 1:
+            elif config[0] == 1:
                 nx_setValue(ser, 6,9,0)
 
 try:
