@@ -133,7 +133,7 @@ def humMode(hum_relay, x, hum):
     elif x == "hy1":
         if hum < 80:
             GPIO.output(hum_relay, 1)
-            nx_setValue(ser, 6,10,0)
+            nx_setValue(ser, 6,10,1)
         elif hum > 80:
             GPIO.output(hum_relay, 0)
             nx_setValue(ser, 6,10,1)
@@ -143,7 +143,7 @@ def humMode(hum_relay, x, hum):
         #print("hy1")
     elif x == "hy2":
         GPIO.output(hum_relay, 1)
-        nx_setValue(ser, 6,10,1)
+        nx_setValue(ser, 6,10,0)
         nx_setValue(ser, 4, 1, 0)
         nx_setValue(ser, 4, 2, 0)
         nx_setValue(ser, 4, 3, 1)
@@ -157,11 +157,9 @@ def lampMode(lamp_relay, x):
 
 def writeData(tempIn, humIn, tempOut, humOut ):
     """ write all data to db """
-    #iso = time.ctime()
     json_body_in = [
     {
         "measurement": "SensoreInBox",
-    #        "time": iso,
             "fields": {
                 "Temperature" : tempIn,
                 "Humidity" : humIn
@@ -172,7 +170,6 @@ def writeData(tempIn, humIn, tempOut, humOut ):
     json_body_out = [
     {
         "measurement": "SensoreOutBox",
-     #       "time": iso,
             "fields": {
                 "Temperature" : tempOut,
                 "Humidity" : humOut

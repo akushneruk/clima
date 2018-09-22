@@ -39,7 +39,7 @@ firstLampStart()
 
 try:
     while True:
-        # send to influxdb set temperature and humidity for display
+        # send to influxdb temperature and humidity for display
         try:
             nx_setText(ser, 1,1,str(int(sensorIn.read_temperature())))
             nx_setText(ser, 1,2,str(int(sensorIn.read_humidity())))
