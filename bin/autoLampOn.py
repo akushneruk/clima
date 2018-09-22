@@ -27,27 +27,10 @@ def autoLampMode(lamp_relay):
         print("lamp is off")
     return
 
-def turnOffLamp(lamp_relay):
-    with open("current_lamp_mode", 'r+') as file:
-        for line in file:
-            lamp = line
-        file.seek(0)
-    print(lamp) 
-    if lamp == "lt1":
-        GPIO.output(lamp_relay, 0)
-        print("lamp is on")
-        time.sleep(10)
-        GPIO.output(lamp_relay, 1)
-        print("lamp is off")
-    elif lamp == "lt2":
-        GPIO.output(lamp_relay, 1)
-    return
-
 schedule.every().day.at("00:00").do(autoLampMode, lamp_relay)
 
 try:
     while True:
         schedule.run_pending()
-        turnOffLamp(lamp_relay)
 except KeyboardInterrupt:
     pass

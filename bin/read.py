@@ -72,7 +72,7 @@ try:
                 lamp = line
             file.seek(0)
         lampMode(lamp_relay, lamp)
-
+        
         time.sleep(delay)
 except KeyboardInterrupt:
     pass
