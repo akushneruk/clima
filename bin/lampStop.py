@@ -17,6 +17,12 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(lamp_relay, GPIO.OUT, initial=1)
 
+lamp_create = open("manual_lamp_mode", "w+")
+lamp_create.seek(0)
+lamp_create.truncate()
+lamp_create.write("off")
+lamp_create.close()
+
 try:
     while True:
         with open("manual_lamp_mode", 'r+') as file:
