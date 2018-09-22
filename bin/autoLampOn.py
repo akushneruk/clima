@@ -36,7 +36,7 @@ def turnOffLamp(lamp_relay):
     if lamp == "lt1":
         GPIO.output(lamp_relay, 0)
         print("lamp is on")
-        time.sleep(30)
+        time.sleep(10)
         GPIO.output(lamp_relay, 1)
         print("lamp is off")
     elif lamp == "lt2":
@@ -48,5 +48,6 @@ schedule.every().day.at("00:00").do(autoLampMode, lamp_relay)
 try:
     while True:
         schedule.run_pending()
+        turnOffLamp(lamp_relay)
 except KeyboardInterrupt:
     pass
