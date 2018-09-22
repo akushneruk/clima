@@ -104,19 +104,16 @@ def readLampMode(x):
         lamp_mode.truncate()
         lamp_mode.write(x)
         lamp_mode.close()
-        #print("write -- "+x)
     elif x == "lt1":
         lamp_mode.seek(0)
         lamp_mode.truncate()
         lamp_mode.write(x)
         lamp_mode.close()
-        #print("write -- "+x)
     elif x == "lt2":
         lamp_mode.seek(0)
         lamp_mode.truncate()
         lamp_mode.write(x)
         lamp_mode.close()
-        #print("write -- "+x)
 
 def humMode(hum_relay, x, hum):
     if x == "hy0":
@@ -152,19 +149,12 @@ def humMode(hum_relay, x, hum):
 def lampMode(lamp_relay, x):
     if x == "lt1":
         GPIO.output(lamp_relay, 0)
-        time.sleep(10)
-        GPIO.output(lamp_relay, 1)
-        lamp_mode = open("current_lamp_mode", "w+")
+        lamp_mode = open("manual_lamp_mode", "w+")
         lamp_mode.seek(0)
         lamp_mode.truncate()
-        lamp_mode.write("lt2")
+        lamp_mode.write("on")
         lamp_mode.close()
-        nx_setValue(ser, 5,1,0)
-        nx_setValue(ser, 5,2,0)
-        nx_setValue(ser, 5,3,1)
-
-def stopLamp(lamp_relay, x):
-    if x == "lt2":
+    elif x == "lt2":
         GPIO.output(lamp_relay, 1)
 
 def writeData(tempIn, humIn, tempOut, humOut ):
