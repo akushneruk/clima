@@ -25,7 +25,11 @@ delay = 1
 
 try:
     while True:
-        stopLamp(lamp_relay)
+        with open("current_lamp_mode", 'r+') as file:
+            for line in file:
+                lamp = line
+            file.seek(0)
+        stopLamp(lamp_relay, lamp)
         time.sleep(delay)
 except KeyboardInterrupt:
     pass
