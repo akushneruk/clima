@@ -28,7 +28,6 @@ def firstHumStart():
     nx_setValue(ser, 4,3,0)
 
 def firstVentStart(t):
-    print t
     hum_mode = open("current_vent_mode", "w+")
     hum_mode.seek(0)
     hum_mode.truncate()
