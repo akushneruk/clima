@@ -22,9 +22,25 @@ def autoLampMode(lamp_relay):
     if lamp == "lt0":
         GPIO.output(lamp_relay, 0)
         print("lamp is on")
-        time.sleep(600)
+        time.sleep(300)
         GPIO.output(lamp_relay, 1)
         print("lamp is off")
+    return
+
+def turnOffLamp(lamp_relay):
+    with open("current_lamp_mode", 'r+') as file:
+        for line in file:
+            lamp = line
+        file.seek(0)
+    print(lamp) 
+    if lamp == "lt1":
+        GPIO.output(lamp_relay, 0)
+        print("lamp is on")
+        time.sleep(30)
+        GPIO.output(lamp_relay, 1)
+        print("lamp is off")
+    elif lamp == "lt2":
+        GPIO.output(lamp_relay, 1)
     return
 
 schedule.every().day.at("00:00").do(autoLampMode, lamp_relay)
