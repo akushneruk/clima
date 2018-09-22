@@ -162,7 +162,9 @@ def lampMode(lamp_relay, x):
         nx_setValue(ser, 5,1,0)
         nx_setValue(ser, 5,2,0)
         nx_setValue(ser, 5,3,1)
-    elif x == "lt2":
+
+def stopLamp(lamp_relay):
+    if x == "lt2":
         GPIO.output(lamp_relay, 1)
 
 def writeData(tempIn, humIn, tempOut, humOut ):
