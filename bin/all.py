@@ -40,7 +40,7 @@ def firstVentStart(t):
         nx_setValue(ser, 2,3,0)
         nx_setValue(ser, 2,4,1)
     elif t < 16:
-        hum_mode.write("vt4")
+        hum_mode.write("vt1")
         hum_mode.close()
         nx_setValue(ser, 2,1,0)
         nx_setValue(ser, 2,2,1)
