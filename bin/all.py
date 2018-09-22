@@ -154,6 +154,11 @@ def lampMode(lamp_relay, x):
         GPIO.output(lamp_relay, 0)
         time.sleep(10)
         GPIO.output(lamp_relay, 1)
+        lamp_mode = open("current_lamp_mode", "w+")
+        lamp_mode.seek(0)
+        lamp_mode.truncate()
+        lamp_mode.write("lt2")
+        lamp_mode.close()
     elif x == "lt2":
         GPIO.output(lamp_relay, 1)
 
