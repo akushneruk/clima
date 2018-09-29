@@ -9,7 +9,7 @@ import RPi.GPIO as GPIO
 from all import *
 
 # Init
-lamp_relay = 26
+lamp_relay = 6
 delay = 300
 
 GPIO.setmode(GPIO.BCM)

@@ -1,2 +1,4 @@
 __pycache__/
 bin/current_*
+bin/manual_lamp_mode
+bin/status

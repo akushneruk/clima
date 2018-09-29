@@ -6,7 +6,7 @@ import time
 import RPi.GPIO as GPIO
 
 
-lamp_relay = 26
+lamp_relay = 6
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(lamp_relay, GPIO.OUT, initial=1)
