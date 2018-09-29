@@ -43,6 +43,8 @@ try:
         try:
             nx_setText(ser, 1,1,str(int(sensorIn.read_temperature())))
             nx_setText(ser, 1,2,str(int(sensorIn.read_humidity())))
+            nx_setText(ser, 1,8,str(int(sensorOut.read_temperature())))
+            nx_setText(ser, 1,9,str(int(sensorOut.read_humidity())))
         except IOError:
             pass
         
