@@ -196,7 +196,8 @@ def sendStatus():
         nx_setValue(ser, 2,2,0)
         nx_setValue(ser, 2,3,0)
         nx_setValue(ser, 2,4,1)
-
+        nx_setText(ser, 6,12,"vt4")
+        
     with open("current_lamp_mode", 'r+') as file:
         for line in file:
             mode = line
