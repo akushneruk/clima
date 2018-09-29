@@ -8,6 +8,9 @@ from all import *
 
 #---INIT--
 vent_relay = 6
+
+
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(vent_relay, GPIO.OUT, initial=1)
