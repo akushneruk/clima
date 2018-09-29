@@ -9,7 +9,7 @@ import RPi.GPIO as GPIO
 from all import *
 
 # Init
-lamp_relay = 26
+lamp_relay = 5
 delay = 300
 
 GPIO.setmode(GPIO.BCM)
@@ -19,7 +19,7 @@ GPIO.setup(lamp_relay, GPIO.OUT, initial=1)
 lamp_create = open("manual_lamp_mode", "w+")
 lamp_create.seek(0)
 lamp_create.truncate()
-lamp_create.write("off")
+lamp_create.write("off")g
 lamp_create.close()
 
 try:
