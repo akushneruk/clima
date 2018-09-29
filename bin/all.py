@@ -163,14 +163,17 @@ def sendStatus():
         nx_setValue(ser, 4, 1, 1)
         nx_setValue(ser, 4, 2, 0)
         nx_setValue(ser, 4, 3, 0)
+        nx_setText(ser, 6,13,"hy0")
     elif mode == "hy1":
         nx_setValue(ser, 4, 1, 0)
         nx_setValue(ser, 4, 2, 1)
         nx_setValue(ser, 4, 3, 0)
+        nx_setText(ser, 6,13,"hy1")
     elif mode == "hy2":
         nx_setValue(ser, 4, 1, 0)
         nx_setValue(ser, 4, 2, 0)
         nx_setValue(ser, 4, 3, 1)
+        nx_setText(ser, 6,13,"hy2")
 
     with open("current_vent_mode", 'r+') as file:
         for line in file:
@@ -181,16 +184,19 @@ def sendStatus():
         nx_setValue(ser, 2,2,0)
         nx_setValue(ser, 2,3,0)
         nx_setValue(ser, 2,4,0)
+        nx_setText(ser, 6,12,"vt0")
     elif mode == "vt1":
         nx_setValue(ser, 2,1,0)
         nx_setValue(ser, 2,2,1)
         nx_setValue(ser, 2,3,0)
         nx_setValue(ser, 2,4,0)
+        nx_setText(ser, 6,12,"vt1")
     elif mode == "vt2":
         nx_setValue(ser, 2,1,0)
         nx_setValue(ser, 2,2,0)
         nx_setValue(ser, 2,3,1)
         nx_setValue(ser, 2,4,0)
+        nx_setText(ser, 6,12,"vt2")
     elif mode == "vt4":
         nx_setValue(ser, 2,1,0)
         nx_setValue(ser, 2,2,0)
@@ -206,14 +212,17 @@ def sendStatus():
         nx_setValue(ser, 5,1,1)
         nx_setValue(ser, 5,2,0)
         nx_setValue(ser, 5,3,0)
+        nx_setText(ser, 6,14,"lt0")
     elif mode == "lt1":
         nx_setValue(ser, 5,1,0)
         nx_setValue(ser, 5,2,1)
         nx_setValue(ser, 5,3,0)   
+        nx_setText(ser, 6,14,"lt1")
     elif mode == "lt2":
         nx_setValue(ser, 5,1,0)
         nx_setValue(ser, 5,2,0)
         nx_setValue(ser, 5,3,1)     
+        nx_setText(ser, 6,14,"lt2")
 
     status = open("status", "w+")
     status.seek(0)
