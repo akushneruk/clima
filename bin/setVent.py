@@ -14,8 +14,8 @@ GPIO.setup(vent_relay, GPIO.OUT, initial=1)
 
 sensorIn = SHT31(address = 0x44)
 
-def gpio(value):
-    GPIO.output(6, value)
+def gpio(value, vent_relay):
+    GPIO.output(vent_relay, value)
 
 def fan_thread():
     current_mode_activated = None
@@ -43,7 +43,7 @@ def fan_thread():
         value = config[0] if elapsed < config[2] else config[1]
         if current_value != value:
             current_value = value
-            gpio(value)
+            gpio(value, vent_relay)
             if value == 0:
                 nx_setValue(ser, 6,9,1)
             elif value == 1:
