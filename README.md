@@ -1,5 +1,5 @@
-# CLIMA SYSTEM MONITORING for meet
-#### on Rasperberry Pi model 3
+# CLIMA SYSTEM MONITORING for meat
+#### on Rasperberry Pi model 3, nextion and python3
 
 ### Setup ENV
 
@@ -33,8 +33,6 @@
     ```bash
         sudo apt-get install python3-pip
         sudo python3 -m pip install --upgrade pip setuptools wheel
-    ```
-    ```bash
         sudo pip3 install Adafruit_SHT31
         sudo pip3 install Adafruit_GPIO
         sudo pip3 install automationhat
@@ -47,7 +45,7 @@
         sudo apt-get install git -y
         git clone https://github.com/akushneruk/clima.git
     ```
-
+6. Install supervisor and import configs from ./supervisor_confgs. Check if status up and runnig !
 
 # INFO
 Relays:
