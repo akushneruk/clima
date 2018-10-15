@@ -6,7 +6,7 @@ import time
 import RPi.GPIO as GPIO
 
 
-lamp_relay = 5
+lamp_relay = 26
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(lamp_relay, GPIO.OUT, initial=1)
@@ -26,7 +26,7 @@ def autoLampMode(lamp_relay):
         print("lamp is off")
     return
 
-schedule.every().day.at("00:00").do(autoLampMode, lamp_relay)
+schedule.every().day.at("00:20").do(autoLampMode, lamp_relay)
 
 try:
     while True:
