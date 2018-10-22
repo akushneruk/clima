@@ -26,7 +26,7 @@ def autoLampMode(lamp_relay):
         print("lamp is off")
     return
 
-schedule.every().day.at("00:20").do(autoLampMode, lamp_relay)
+schedule.every().day.at("02:20").do(autoLampMode, lamp_relay)
 
 try:
     while True:
