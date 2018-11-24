@@ -5,6 +5,7 @@ import datetime
 import struct
 import re
 import serial
+import socket
 import RPi.GPIO as GPIO
 from influxdb import InfluxDBClient
 from Adafruit_SHT31 import *
@@ -34,6 +35,7 @@ GPIO.setup(lamp_relay, GPIO.OUT, initial=1)
 sensorIn = SHT31(address = 0x44)
 sensorOut = SHT31(address = 0x45)
 
+localIp()
 firstHumStart()
 firstLampStart()
 
