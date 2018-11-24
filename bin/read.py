@@ -35,7 +35,6 @@ GPIO.setup(lamp_relay, GPIO.OUT, initial=1)
 sensorIn = SHT31(address = 0x44)
 sensorOut = SHT31(address = 0x45)
 
-localIp()
 firstHumStart()
 firstLampStart()
 
@@ -79,6 +78,7 @@ try:
         #
         sendStatus()
         currentTime()
+        localIp()
         time.sleep(delay)
 except KeyboardInterrupt:
     pass
