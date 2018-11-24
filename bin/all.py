@@ -17,6 +17,11 @@ ser = serial.Serial(
     timeout=1
 )
 
+def currentTime():
+    now = datetime.datetime.now()
+    currentTime = str(now.hour)+":"+str(now.minute)
+    nx_setText(ser, 6, 16, currentTime)
+
 def firstHumStart():
     hum_mode = open("current_hum_mode", "w+")
     hum_mode.seek(0)

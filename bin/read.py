@@ -76,7 +76,7 @@ try:
         
         #
         sendStatus()
-
+        currentTime()
         time.sleep(delay)
 except KeyboardInterrupt:
     pass
